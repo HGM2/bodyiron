@@ -1,4 +1,4 @@
-# Cambiar a PHP 8.2 con Apache
+# Imagen base de PHP con Apache
 FROM php:8.2-apache
 
 # Instalar extensiones necesarias para Laravel
@@ -23,9 +23,14 @@ WORKDIR /var/www/html
 # Copiar los archivos del proyecto
 COPY . .
 
+# Configurar Apache para servir desde el directorio public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
 # Asignar permisos correctos
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Instalar dependencias de Composer
 RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
