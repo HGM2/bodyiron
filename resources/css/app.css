@@ -1,0 +1,28 @@
+/* Estilos adicionales para el tema oscuro */
+body {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.table-dark th, .table-dark td {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+.btn-primary {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+
+

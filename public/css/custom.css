@@ -1,0 +1,37 @@
+/* Cambiar el color del menú desplegable y los elementos del menú de usuario */
+.navbar-nav .user-menu .dropdown-menu {
+    background-color: #343a40 !important; /* Fondo oscuro */
+    color: #ffffff !important; /* Texto claro */
+}
+
+/* Estilos para los enlaces del menú de usuario */
+.navbar-nav .user-menu .dropdown-menu .dropdown-item,
+.navbar-nav .user-menu .dropdown-menu .btn {
+    color: #ffffff !important; /* Texto blanco */
+}
+
+/* Cambiar el color de fondo al hacer hover sobre los enlaces */
+.navbar-nav .user-menu .dropdown-menu .dropdown-item:hover,
+.navbar-nav .user-menu .dropdown-menu .btn:hover {
+    background-color: #495057 !important; /* Fondo gris oscuro */
+}
+
+/* Estilo específico para iconos en el menú de usuario */
+.navbar-nav .user-menu .dropdown-menu .fa-user {
+    color: #00a2ff !important; /* Azul claro para el icono de perfil */
+}
+
+.navbar-nav .user-menu .dropdown-menu .fa-power-off {
+    color: #ff4b4b !important; /* Rojo para el icono de cerrar sesión */
+}
+
+.navbar .user-menu .dropdown-toggle {
+    display: flex !important;
+    align-items: center;
+    color: white !important;
+}
+
+.navbar .user-menu .dropdown-toggle:hover {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.1);
+}
