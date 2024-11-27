@@ -1,5 +1,5 @@
-# Imagen base de PHP con Apache
-FROM php:8.1-apache
+# Cambiar a PHP 8.2 con Apache
+FROM php:8.2-apache
 
 # Instalar extensiones necesarias para Laravel
 RUN apt-get update && apt-get install -y \
