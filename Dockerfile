@@ -10,10 +10,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd intl
 
 # Instalar Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Configurar el directorio de trabajo
 WORKDIR /var/www/html
@@ -21,13 +21,12 @@ WORKDIR /var/www/html
 # Copiar los archivos del proyecto
 COPY . .
 
-# Instalar dependencias de Composer
-RUN composer install --no-dev --optimize-autoloader
-
 # Asignar permisos correctos
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage \
-    && chmod -R 775 /var/www/html/bootstrap/cache
+    && chmod -R 775 /var/www/html
+
+# Instalar dependencias de Composer
+RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
 
 # Configurar Apache
 RUN a2enmod rewrite
