@@ -21,10 +21,13 @@ WORKDIR /var/www/html
 # Copiar los archivos del proyecto
 COPY . .
 
+# Instalar dependencias de Composer
+RUN composer install --no-dev --optimize-autoloader
+
 # Asignar permisos correctos
 RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
+    && chmod -R 775 /var/www/html/storage \
+    && chmod -R 775 /var/www/html/bootstrap/cache
 
 # Configurar Apache
 RUN a2enmod rewrite
@@ -32,5 +35,5 @@ RUN a2enmod rewrite
 # Exponer el puerto 80
 EXPOSE 80
 
-# Comando para iniciar Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=80"]
+# Comando para iniciar Apache
+CMD ["apache2-foreground"]
