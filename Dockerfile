@@ -27,6 +27,9 @@ COPY . .
 RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
+# Configurar Apache para habilitar mod_headers
+RUN a2enmod rewrite headers
+
 # Asignar permisos correctos
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
@@ -34,9 +37,6 @@ RUN chown -R www-data:www-data /var/www/html \
 
 # Instalar dependencias de Composer
 RUN composer install --no-dev --optimize-autoloader --prefer-dist --no-interaction
-
-# Configurar Apache
-RUN a2enmod rewrite
 
 # Exponer el puerto 80
 EXPOSE 80
